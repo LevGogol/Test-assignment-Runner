@@ -8,7 +8,6 @@ namespace TestAssignment
         [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private GameObject _coinPrefab;
 
-        private float _lastSpawnPosition;
         private float _step = 15f;
         private int _coinsOnScene = 6;
 
@@ -26,7 +25,11 @@ namespace TestAssignment
             var xPosition = (_gameSettings.RoadWidth - 1f) * Random.Range(-1f, 1f);
             var spawnPosition = new Vector3(xPosition, 1f, distance);
             var coin = Instantiate(_coinPrefab, spawnPosition, Quaternion.identity, transform).GetComponent<Coin>();
-            coin.OnCoinCollected += () => _gameData.OnCoinsChanged(_gameData.Coins++);
+            coin.OnCoinCollected += () =>
+            {
+                _gameData.Coins++;
+                _gameData.OnCoinsChanged(_gameData.Coins);
+            };
         }
     }
 }

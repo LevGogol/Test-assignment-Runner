@@ -12,7 +12,6 @@ namespace TestAssignment
             if (collider.TryGetComponent<Player>(out var player))
             {
                 OnFinish();
-                player.Finish();
             }
         }
     }
